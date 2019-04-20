@@ -10,8 +10,8 @@ Created on Wed Apr  3 22:50:05 2019
 
 import os, sys
 import numpy as np
-import oddt
-import matplotlib
+#import oddt
+#import matplotlib
 from matplotlib import pyplot as plt
 from oddt.interactions import (close_contacts, hbonds, hydrophobic_contacts, pi_cation, pi_stacking, salt_bridges)
 
@@ -68,9 +68,9 @@ def feature_count(interaction_array, reference_array):
 
 
 #START
-#sys.argv.append('/home/andrea/Dropbox/Herbicide_Bounds_xtal_Structures/Docking/input_files/2j8c_clean.pdb')
-#sys.argv.append('/home/andrea/Dropbox/Herbicide_Bounds_xtal_Structures/Docking/input_files/AU2.pdb')
-#sys.argv.append('/home/andrea/Dropbox/Herbicide_Bounds_xtal_Structures/Docking/input_files/test.pdb')
+sys.argv.append('/home/andrea/Dropbox/Herbicide_Bounds_xtal_Structures/Docking/1_2J8C_-cofctr_og/2j8c_clean.pdb')
+sys.argv.append('/home/andrea/Dropbox/Herbicide_Bounds_xtal_Structures/Docking/5_2J8C_WT-I224S_ng/2j8c_grid_wt/output/UQ0.pdb')
+sys.argv.append('/home/andrea/Dropbox/Herbicide_Bounds_xtal_Structures/Docking/5_2J8C_WT-I224S_ng/2j8c_grid_wt/output/atz.pdb')
 
 #Take first argument as the target protein
 protein = next(oddt.toolkit.readfile('pdb', sys.argv[1]))
@@ -86,6 +86,8 @@ hblist = []
 hclist = []
 hbs = []
 hcs = []
+FC_hb = []
+FC_hc = []
 for i in range(len(ligand)):
     lig = ligand[i]
     #create a list with each ligands interactions as a sublist
@@ -101,8 +103,7 @@ for i in range(len(ligand)):
     hctot = set([(x[0],x[1]) for x in hclist[i]])
 
 #binary arrays retrieving for interactions
-FC_hb = []
-FC_hc = []
+
 for i in range(len(ligand)):
     FC_hb.append(feature_count(hbs[i], hbtot))
     FC_hc.append(feature_count(hcs[i], hctot))
@@ -140,19 +141,19 @@ plt.show()
 
 ##plot the features presence matrix
 ##firstly for hydrophobic
-#fig, ax = plt.subplots()
-#fig.set_size_inches(12, 9)
-#ax.matshow(narray_hc, cmap=plt.cm.Blues)
+fig, ax = plt.subplots()
+fig.set_size_inches(12, 9)
+ax.matshow(narray_hc, cmap=plt.cm.Greens)
 #
 ## put the major ticks at the middle of each cell
-#ax.set_xticks(np.arange(narray_hc.shape[1]), minor=False)
-#ax.set_yticks(np.arange(narray_hc.shape[0]), minor=False)
-#ax.invert_yaxis()
+ax.set_xticks(np.arange(narray_hc.shape[1]), minor=False)
+ax.set_yticks(np.arange(narray_hc.shape[0]), minor=False)
+ax.invert_yaxis()
 #
 ##labels
-#ax.set_xticklabels(res_hctot, minor=False)
-#ax.set_yticklabels(lignames, minor=False)
-#plt.show()
+ax.set_xticklabels(res_hctot, minor=False)
+ax.set_yticklabels(lignames, minor=False)
+plt.show()
 
 
 
