@@ -69,8 +69,8 @@ def feature_count(interaction_array, reference_array):
 
 #START
 sys.argv.append('/home/andrea/Dropbox/Herbicide_Bounds_xtal_Structures/Docking/1_2J8C_-cofctr_og/2j8c_clean.pdb')
-sys.argv.append('/home/andrea/Dropbox/Herbicide_Bounds_xtal_Structures/Docking/5_2J8C_WT-I224S_ng/2j8c_grid_wt/output/UQ0.pdb')
-sys.argv.append('/home/andrea/Dropbox/Herbicide_Bounds_xtal_Structures/Docking/5_2J8C_WT-I224S_ng/2j8c_grid_wt/output/atz.pdb')
+sys.argv.append('/home/andrea/Dropbox/Herbicide_Bounds_xtal_Structures/Docking/5_2J8C_WT-I224S_ng/5a_2j8c_grid_wt/output/UQ0.pdb')
+sys.argv.append('/home/andrea/Dropbox/Herbicide_Bounds_xtal_Structures/Docking/5_2J8C_WT-I224S_ng/5a_2j8c_grid_wt/output/atz.pdb')
 
 #Take first argument as the target protein
 protein = next(oddt.toolkit.readfile('pdb', sys.argv[1]))
@@ -86,6 +86,8 @@ hblist = []
 hclist = []
 hbs = []
 hcs = []
+hbtot = []
+hctot = []
 FC_hb = []
 FC_hc = []
 for i in range(len(ligand)):
@@ -96,7 +98,7 @@ for i in range(len(ligand)):
 
     hclist.append(hydrophobics_identifier(protein, lig))
     hcs.append([(x[0],x[1]) for x in hclist[i]])
-    
+
     hbtot.extend(hbs[i])
     hctot.extend(hcs[i])
 
