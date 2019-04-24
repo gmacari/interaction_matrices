@@ -11,10 +11,16 @@ Created on Wed Apr  3 22:50:05 2019
 import os, sys
 import numpy as np
 import oddt
-#import matplotlib
+import argparse
 from matplotlib import pyplot as plt
 from oddt.interactions import (close_contacts, hbonds, hydrophobic_contacts, pi_cation, pi_stacking, salt_bridges)
 
+parser = argparse.ArgumentParser("protein-ligands interactions plotter")
+parser.add_argument("-p", "--protein", type=str, help="protein file in pdb format", required=True)
+parser.add_argument("-l", "--ligands", type=str, help="ligands", nargs='+', required=True)
+args = parser.parse_args()
+input_protein = args.protein
+input_ligands = args.ligands
 
 #handy function to automatize hbond identification
 def hbonds_identifier(protein, ligand):
