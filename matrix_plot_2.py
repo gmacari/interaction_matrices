@@ -10,7 +10,7 @@ Created on Wed Apr  3 22:50:05 2019
 
 import os, sys
 import numpy as np
-#import oddt
+import oddt
 #import matplotlib
 from matplotlib import pyplot as plt
 from oddt.interactions import (close_contacts, hbonds, hydrophobic_contacts, pi_cation, pi_stacking, salt_bridges)
@@ -96,12 +96,12 @@ for i in range(len(ligand)):
 
     hclist.append(hydrophobics_identifier(protein, lig))
     hcs.append([(x[0],x[1]) for x in hclist[i]])
+    
+    hbtot.extend(hbs[i])
+    hctot.extend(hcs[i])
 
-for i in range(len(ligand)):
-    #creating a non-redundant list of all the residues in each interaction
-    hbtot = set([(x[0],x[1]) for x in hblist[i]])
-    hctot = set([(x[0],x[1]) for x in hclist[i]])
-
+hbtot = set(hbtot)
+hctot = set(hctot)
 #binary arrays retrieving for interactions
 
 for i in range(len(ligand)):
